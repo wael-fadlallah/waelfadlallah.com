@@ -1,0 +1,4 @@
+baseURL = 'http://localhost:3000/'
+languageCode = 'en-us'
+title = "Wael's blog"
+theme='hello'
