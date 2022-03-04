@@ -2,3 +2,8 @@ baseURL = 'https://www.waelfadlallah.com/'
 languageCode = 'en-us'
 title = "Wael blog"
 theme='hello'
+
+
+[[deployment.targets]]
+name = "mydeployment"
+URL = "gs://waelfadlallah.com"

@@ -1,36 +1,13 @@
-# env: standard
-# runtime: nodejs16
-runtime: python27
-api_version: 1
-threadsafe: true
+env: standard
+runtime: nodejs16
 service: default
-
 handlers:
-  - url: /robots.txt
-    static_files: www/robots.txt
-    upload: www/robots.txt
-    secure: always
-
-  # file with extensions (longer cache period)
-  - url: /(.*\.(css|js|woff|woff2|ico|png|jpg))
-    static_files: www/\1
-    upload: www/(.*)
-    expiration: "14d"
-    secure: always
-
-  # file with extensions
-  - url: /(.*\..*)
-    static_files: www/\1
-    upload: www/(.*)
-    secure: always
-
-  # assume file without extensions use index.html
-  - url: /(.*)/
-    static_files: www/\1/index.html
-    upload: www/(.*)/index.html
-    secure: always
-
+  - url: /posts/.*
+    static_files: public/posts/.*/index.html
+    upload: public/posts/.*/index.html
   - url: /
-    static_files: www/index.html
-    upload: www/index.html
-    secure: always
+    static_files: public/index.html
+    upload: public/index.html
+  - url: /(.*)
+    static_files: public/\1
+    upload: public/(.*)
