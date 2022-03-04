@@ -1,4 +1,4 @@
-baseURL = 'http://localhost:3000/'
+baseURL = 'https://www.waelfadlallah.com/'
 languageCode = 'en-us'
-title = "Wael's blog"
+title = "Wael blog"
 theme='hello'

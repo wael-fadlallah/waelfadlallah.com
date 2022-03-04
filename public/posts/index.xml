@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Wael&#39;s blog</title>
+    <title>Posts on Wael blog</title>
     
     
     
-    <link>http://localhost:3000/posts/</link>
-    <description>Recent content in Posts on Wael&#39;s blog</description>
+    <link>http://www.waelfadlallah.com/posts/</link>
+    <description>Recent content in Posts on Wael blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 02 Mar 2022 22:59:51 +0400</lastBuildDate>
     
-	<atom:link href="http://localhost:3000/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://www.waelfadlallah.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>My First Post</title>
-      <link>http://localhost:3000/posts/my-first-post/</link>
+      <link>http://www.waelfadlallah.com/posts/my-first-post/</link>
       <pubDate>Wed, 02 Mar 2022 22:59:51 +0400</pubDate>
       
-      <guid>http://localhost:3000/posts/my-first-post/</guid>
+      <guid>http://www.waelfadlallah.com/posts/my-first-post/</guid>
       <description>
         
           

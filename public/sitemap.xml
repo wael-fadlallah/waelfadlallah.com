@@ -2,23 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:3000/posts/my-first-post/</loc>
+    <loc>http://www.waelfadlallah.com/posts/my-first-post/</loc>
     <lastmod>2022-03-02T22:59:51+04:00</lastmod>
   </url><url>
-    <loc>http://localhost:3000/posts/</loc>
+    <loc>http://www.waelfadlallah.com/posts/</loc>
     <lastmod>2022-03-02T22:59:51+04:00</lastmod>
   </url><url>
-    <loc>http://localhost:3000/</loc>
+    <loc>http://www.waelfadlallah.com/</loc>
     <lastmod>2022-03-02T22:59:51+04:00</lastmod>
   </url><url>
-    <loc>http://localhost:3000/blogs/</loc>
+    <loc>http://www.waelfadlallah.com/blogs/</loc>
     <lastmod>2022-03-02T22:52:23+04:00</lastmod>
   </url><url>
-    <loc>http://localhost:3000/blogs/hello-world/</loc>
+    <loc>http://www.waelfadlallah.com/blogs/hello-world/</loc>
     <lastmod>2022-03-02T22:52:23+04:00</lastmod>
   </url><url>
-    <loc>http://localhost:3000/categories/</loc>
+    <loc>http://www.waelfadlallah.com/categories/</loc>
   </url><url>
-    <loc>http://localhost:3000/tags/</loc>
+    <loc>http://www.waelfadlallah.com/tags/</loc>
   </url>
 </urlset>
