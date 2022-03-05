@@ -2,12 +2,11 @@ env: standard
 runtime: nodejs16
 service: default
 handlers:
-  - url: /posts/.*
-    static_files: public/posts/.*/index.html
-    upload: public/posts/.*/index.html
+  - url: /posts/(.+)/
+    static_files: public/posts/\1/index.html
+    upload: public/posts/(.+)/index.html
+  - url: /assets
+    static_dir: public/assets
   - url: /
     static_files: public/index.html
     upload: public/index.html
-  - url: /(.*)
-    static_files: public/\1
-    upload: public/(.*)
