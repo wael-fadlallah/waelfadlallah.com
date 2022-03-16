@@ -25,6 +25,46 @@ For demonstration purposes I have built a simple Todo list app with React and Ty
     > App structure
 
 - Getting our hands dirty with the tests
+
+{{< code language="javascript" title="Really cool snippet" id="1" expand="Show" collapse="Hide" isCollapsed="true" >}}
+import { it, describe, expect, beforeEach, vi } from "vitest";
+import App from "./App";
+import TodoPanel from "./components/TodoPanel";
+import { shallow } from "enzyme";
+import { render, screen, userEvent, fireEvent } from "./utils/test-utils";
+import "@testing-library/jest-dom/extend-expect";
+
+describe("App Test", () => {
+let wrapper: any;
+
+beforeEach(() => {
+wrapper = shallow(<App />);
+});
+
+it("Check if the component is mounted", () => {
+expect(App).toBeTruthy();
+});
+
+it("Check if the TodoPanel has been rendered", () => {
+expect(wrapper.find(TodoPanel).length).toBe(1);
+});
+
+it("Check if the button has been rendered", () => {
+expect(wrapper.find("button").length).toBe(1);
+});
+
+it("Check if todo item is added", async () => {
+render(<App />);
+const input = screen.getByTestId("todo-input") as HTMLInputElement;
+fireEvent.change(input, {
+target: { value: "Testing" },
+});
+userEvent.click(screen.getByRole("button"));
+expect(await screen.getByText(/Testing/i)).toBeInTheDocument();
+});
+});
+{{< /code >}}
+
 - Manual Deployment - setting up the app engine configurations
 - Setting up GitHub actions
 - Conclusion
