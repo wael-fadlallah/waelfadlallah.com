@@ -4,6 +4,10 @@ date: 2022-03-14T22:05:57+04:00
 draft: false
 ---
 
+- [Overview](#overview)
+- [About the example app](#about-the-example-app)
+- [Getting our hands dirty with the tests](#getting-our-hands-dirty-with-the-tests)
+
 ## Overview
 
 One of the most important skills to master for becoming an experienced software developer is the automation of the repeatable tasks and I believe the most important one of them is the development process is self which includes merging, testing, and deploying the code and in the article, I want to show to efficiently build a CI/CD pipeline that does all of that
@@ -22,11 +26,31 @@ I found that GitHub actions to be extremely powerful and easy to use and the fac
 
 For demonstration purposes I have built a simple Todo list app with React and Typescript, I have used Vite as a development server and build tool because its simple, fast, and most importantly easily used with Vitest for testing
 
-    > App structure
+```test
+ 📂 Todo-App
+ ┣ 📂node_modules
+ ┣ 📂src
+ ┃ ┣ 📂components
+ ┃ ┃ ┗ 📜TodoPanel.tsx
+ ┃ ┣ 📂utils
+ ┃ ┃ ┗ 📜test-utils.tsx
+ ┃ ┣ 📜App.tsx
+ ┃ ┣ 📜App.spec.ts
+ ┃ ┣ 📜index.css
+ ┃ ┣ 📜Types.ts
+ ┣ 📜App.yaml
+ ┣ 📜index.html
+ ┣ 📜postcss.config.js
+ ┣ 📜tailwind.config.js
+ ┣ 📜tsconfig.json
+ ┣ 📜vite.config.ts
+ ┣ 📜.gitignore
+ ┗ 📜package.json
+```
 
-- Getting our hands dirty with the tests
+## Getting our hands dirty with the tests
 
-{{< code language="javascript" title="Really cool snippet" id="1" expand="Show" collapse="Hide" isCollapsed="true" >}}
+{{< code language="javascript" title="App.spec.tsx" id="1" expand="Show" collapse="Hide" isCollapsed="false" >}}
 import { it, describe, expect, beforeEach, vi } from "vitest";
 import App from "./App";
 import TodoPanel from "./components/TodoPanel";
@@ -35,33 +59,33 @@ import { render, screen, userEvent, fireEvent } from "./utils/test-utils";
 import "@testing-library/jest-dom/extend-expect";
 
 describe("App Test", () => {
-let wrapper: any;
+  let wrapper: any;
 
-beforeEach(() => {
-wrapper = shallow(<App />);
-});
+  beforeEach(() => {
+    wrapper = shallow(<App />);
+  });
 
-it("Check if the component is mounted", () => {
-expect(App).toBeTruthy();
-});
+  it("Check if the component is mounted", () => {
+    expect(App).toBeTruthy();
+  });
 
-it("Check if the TodoPanel has been rendered", () => {
-expect(wrapper.find(TodoPanel).length).toBe(1);
-});
+  it("Check if the TodoPanel has been rendered", () => {
+    expect(wrapper.find(TodoPanel).length).toBe(1);
+  });
 
-it("Check if the button has been rendered", () => {
-expect(wrapper.find("button").length).toBe(1);
-});
+  it("Check if the button has been rendered", () => {
+    expect(wrapper.find("button").length).toBe(1);
+  });
 
-it("Check if todo item is added", async () => {
-render(<App />);
-const input = screen.getByTestId("todo-input") as HTMLInputElement;
-fireEvent.change(input, {
-target: { value: "Testing" },
-});
-userEvent.click(screen.getByRole("button"));
-expect(await screen.getByText(/Testing/i)).toBeInTheDocument();
-});
+  it("Check if todo item is added", async () => {
+    render(<App />);
+    const input = screen.getByTestId("todo-input") as HTMLInputElement;
+    fireEvent.change(input, {
+      target: { value: "Testing" },
+    });
+    userEvent.click(screen.getByRole("button"));
+    expect(await screen.getByText(/Testing/i)).toBeInTheDocument();
+  });
 });
 {{< /code >}}
 
