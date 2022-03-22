@@ -1,7 +1,8 @@
 env: standard
 runtime: nodejs16
 service: default
-http_headers: "*"
+http_headers:
+  Access-Control-Allow-Origin: "*"
 # handlers:
 #   - url: /posts/(.+)/
 #     static_files: public/posts/\1/index.html
