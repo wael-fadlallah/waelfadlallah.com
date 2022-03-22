@@ -1,6 +1,7 @@
 env: standard
 runtime: nodejs16
 service: default
+http_headers: "*"
 # handlers:
 #   - url: /posts/(.+)/
 #     static_files: public/posts/\1/index.html
