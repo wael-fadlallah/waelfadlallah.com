@@ -11,7 +11,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta
   name="description"
-  content="Overview About the example app Getting our hands dirty with the tests  Overview #  One of the most important skills to master for becoming an experienced software developer is the automation of the repeatable tasks and I believe the most important one of them is the development process is self which includes merging, testing, and deploying the code and in the article, I want to show to efficiently build a CI/CD pipeline that does all of that"
+  content="Overview About the example app Getting our hands dirty with the tests Manual Deployment  Overview #  One of the most important skills to master for becoming an experienced software developer is the automation of the repeatable tasks and I believe the most important one of them is the development process is self which includes merging, testing, and deploying the code and in the article, I want to show to efficiently build a CI/CD pipeline that does all of that"
 />
 <meta
   name="keywords"
@@ -47,12 +47,12 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Building Efficient Ci/Cd Pipeline with GitHub actions and app engine"/>
-<meta name="twitter:description" content="Overview About the example app Getting our hands dirty with the tests  Overview #  One of the most important skills to master for becoming an experienced software developer is the automation of the repeatable tasks and I believe the most important one of them is the development process is self which includes merging, testing, and deploying the code and in the article, I want to show to efficiently build a CI/CD pipeline that does all of that"/>
+<meta name="twitter:description" content="Overview About the example app Getting our hands dirty with the tests Manual Deployment  Overview #  One of the most important skills to master for becoming an experienced software developer is the automation of the repeatable tasks and I believe the most important one of them is the development process is self which includes merging, testing, and deploying the code and in the article, I want to show to efficiently build a CI/CD pipeline that does all of that"/>
 
 
 
 <meta property="og:title" content="Building Efficient Ci/Cd Pipeline with GitHub actions and app engine" />
-<meta property="og:description" content="Overview About the example app Getting our hands dirty with the tests  Overview #  One of the most important skills to master for becoming an experienced software developer is the automation of the repeatable tasks and I believe the most important one of them is the development process is self which includes merging, testing, and deploying the code and in the article, I want to show to efficiently build a CI/CD pipeline that does all of that" />
+<meta property="og:description" content="Overview About the example app Getting our hands dirty with the tests Manual Deployment  Overview #  One of the most important skills to master for becoming an experienced software developer is the automation of the repeatable tasks and I believe the most important one of them is the development process is self which includes merging, testing, and deploying the code and in the article, I want to show to efficiently build a CI/CD pipeline that does all of that" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://www.waelfadlallah.com/posts/building-efficient-ci-cd-pipeline/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-14T22:05:57+04:00" />
@@ -137,6 +137,7 @@
 <li><a href="#overview">Overview</a></li>
 <li><a href="#about-the-example-app">About the example app</a></li>
 <li><a href="#getting-our-hands-dirty-with-the-tests">Getting our hands dirty with the tests</a></li>
+<li><a href="#manual-deployment">Manual Deployment</a></li>
 </ul>
 <h2 id="overview">
   Overview
@@ -147,6 +148,7 @@
 <ul>
 <li><strong>Prerequisites</strong>:
 <ul>
+<li>Gcloud CLI <a href="https://cloud.google.com/sdk/docs/install">https://cloud.google.com/sdk/docs/install</a></li>
 <li>Google cloud project with billing enabled</li>
 <li>Google APIs to enable:
 <ul>
@@ -164,29 +166,30 @@
   <a href="#about-the-example-app" class="h-anchor" aria-hidden="true">#</a>
 </h2>
 <p>For demonstration purposes I have built a simple Todo list app with React and Typescript, I have used Vite as a development server and build tool because its simple, fast, and most importantly easily used with Vitest for testing</p>
-<pre tabindex="0"><code class="language-test" data-lang="test"> 📂 Todo-App
- ┣ 📂node_modules
- ┣ 📂src
- ┃ ┣ 📂components
- ┃ ┃ ┗ 📜TodoPanel.tsx
- ┃ ┣ 📂utils
- ┃ ┃ ┗ 📜test-utils.tsx
- ┃ ┣ 📜App.tsx
- ┃ ┣ 📜App.spec.ts
- ┃ ┣ 📜index.css
- ┃ ┣ 📜Types.ts
- ┣ 📜App.yaml
- ┣ 📜index.html
- ┣ 📜postcss.config.js
- ┣ 📜tailwind.config.js
- ┣ 📜tsconfig.json
- ┣ 📜vite.config.ts
- ┣ 📜.gitignore
- ┗ 📜package.json
-</code></pre><h2 id="getting-our-hands-dirty-with-the-tests">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span> 📂 Todo-App
+</span></span><span style="display:flex;"><span> ┣ 📂node_modules
+</span></span><span style="display:flex;"><span> ┣ 📂src
+</span></span><span style="display:flex;"><span> ┃ ┣ 📂components
+</span></span><span style="display:flex;"><span> ┃ ┃ ┗ 📜TodoPanel.tsx
+</span></span><span style="display:flex;"><span> ┃ ┣ 📂utils
+</span></span><span style="display:flex;"><span> ┃ ┃ ┗ 📜test-utils.tsx
+</span></span><span style="display:flex;"><span> ┃ ┣ 📜App.tsx
+</span></span><span style="display:flex;"><span> ┃ ┣ 📜App.spec.ts
+</span></span><span style="display:flex;"><span> ┃ ┣ 📜index.css
+</span></span><span style="display:flex;"><span> ┃ ┣ 📜Types.ts
+</span></span><span style="display:flex;"><span> ┣ 📜App.yaml
+</span></span><span style="display:flex;"><span> ┣ 📜index.html
+</span></span><span style="display:flex;"><span> ┣ 📜postcss.config.js
+</span></span><span style="display:flex;"><span> ┣ 📜tailwind.config.js
+</span></span><span style="display:flex;"><span> ┣ 📜tsconfig.json
+</span></span><span style="display:flex;"><span> ┣ 📜vite.config.ts
+</span></span><span style="display:flex;"><span> ┣ 📜.gitignore
+</span></span><span style="display:flex;"><span> ┗ 📜package.json
+</span></span></code></pre></div><h2 id="getting-our-hands-dirty-with-the-tests">
   Getting our hands dirty with the tests
   <a href="#getting-our-hands-dirty-with-the-tests" class="h-anchor" aria-hidden="true">#</a>
 </h2>
+<p>I have already install and configure Vitest and enzyme to save us time and to keep this post focuses about the CI/CD pipeline, the test is straight forward under the code I will explian what I did.</p>
 
 
 
@@ -205,7 +208,7 @@ import { shallow } from &#34;enzyme&#34;;
 import { render, screen, userEvent, fireEvent } from &#34;./utils/test-utils&#34;;
 import &#34;@testing-library/jest-dom/extend-expect&#34;;
 
-describe(&#34;App Test&#34;, () =&gt; {
+describe(&#34;Test App&#34;, () =&gt; {
   let wrapper: any;
 
   beforeEach(() =&gt; {
@@ -238,8 +241,51 @@ describe(&#34;App Test&#34;, () =&gt; {
   </div>
 
 
+<p>Now we should be able to run vitest and the all test cases shloud pass</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>npx vitest
+</span></span></code></pre></div><h2 id="manual-deployment">
+  Manual Deployment
+  <a href="#manual-deployment" class="h-anchor" aria-hidden="true">#</a>
+</h2>
+<p>If everything goes well now its the time to deploy the project, first lets start by setting up the app engine configurations, create a file in the root of the project and name it <code>app.yaml</code> and put the following</p>
+
+
+
+  <div class="collapsable-code">
+    <input id="2" type="checkbox"  />
+    <label for="2">
+      <span class="collapsable-code__language">yaml</span>
+      <span class="collapsable-code__title">app.yaml</span>
+      <span class="collapsable-code__toggle" data-label-expand="Show" data-label-collapse="Hide"></span>
+    </label>
+    <pre class="language-yaml" ><code>
+env: standard
+runtime: nodejs16
+
+handlers:
+  - url: /assets
+    static_dir: assets
+
+  - url: /(.*\.(js|css))$
+    static_files: assets/\1
+    upload: assets/.*\.(json|ico|js|css)$
+  - url: .*
+    static_files: index.html
+    upload: index.html
+
+</code></pre>
+  </div>
+
+
+<p>now if you didn&rsquo;t install gcloud yet now is a good click <a href="https://cloud.google.com/sdk/docs/install">here</a></p>
+<p>First login to your account</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gcloud auth login
+</span></span></code></pre></div><p>After you you select the account and allow google sdk to use your account you will notice in the terminal your project name, if its not the project that you want to use you can change it with this command</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gcloud config set project PROJECT_ID
+</span></span></code></pre></div><p>Now that we are authenticated we can deploy the app with</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>gcloud app deploy
+</span></span></code></pre></div><p>After the deploing finish you will see the deployed app url, copy it and past it in brower or hold <code>control</code> and click on it</p>
 <ul>
-<li>Manual Deployment - setting up the app engine configurations</li>
 <li>Setting up GitHub actions</li>
 <li>Conclusion</li>
 </ul>

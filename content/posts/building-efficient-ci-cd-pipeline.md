@@ -1,5 +1,5 @@
 ---
-title: "Building Efficient Ci/Cd Pipeline with GitHub actions and app engine"
+title: "Building Efficient CI/CD Pipeline with GitHub actions and app engine"
 date: 2022-03-14T22:05:57+04:00
 draft: false
 ---
