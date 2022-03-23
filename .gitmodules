@@ -1,0 +1,3 @@
+[submodule "theme"]
+	path = themes/hello
+	url = git@github.com:wael-fadlallah/blog-theme.git
