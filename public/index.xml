@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Wael blog</title>
+    <title>Wael</title>
     
     
     
     <link>https://www.waelfadlallah.com/</link>
-    <description>Recent content on Wael blog</description>
+    <description>Recent content on Wael</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Mar 2022 22:59:51 +0400</lastBuildDate>
+    <lastBuildDate>Mon, 14 Mar 2022 22:05:57 +0400</lastBuildDate>
     
 	<atom:link href="https://www.waelfadlallah.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>My First Post</title>
-      <link>https://www.waelfadlallah.com/posts/my-first-post/</link>
-      <pubDate>Wed, 02 Mar 2022 22:59:51 +0400</pubDate>
+      <title>Building Efficient Ci/Cd Pipeline with GitHub actions and app engine</title>
+      <link>https://www.waelfadlallah.com/posts/building-efficient-ci-cd-pipeline/</link>
+      <pubDate>Mon, 14 Mar 2022 22:05:57 +0400</pubDate>
       
-      <guid>https://www.waelfadlallah.com/posts/my-first-post/</guid>
+      <guid>https://www.waelfadlallah.com/posts/building-efficient-ci-cd-pipeline/</guid>
       <description>
         
           
@@ -28,18 +28,18 @@
         
         
         
-          
+          Overview About the example app Getting our hands dirty with the tests Manual Deployment  Overview #  One of the most important skills to master for becoming an experienced software developer is the automation of the repeatable tasks and I believe the most important one of them is the development process is self which includes merging, testing, and deploying the code and in the article, I want to show to efficiently build a CI/CD pipeline that does all of that
           
         
         </description>
     </item>
     
     <item>
-      <title>Hello World</title>
-      <link>https://www.waelfadlallah.com/blogs/hello-world/</link>
-      <pubDate>Wed, 02 Mar 2022 22:52:23 +0400</pubDate>
+      <title>My First Post</title>
+      <link>https://www.waelfadlallah.com/posts/my-first-post/</link>
+      <pubDate>Wed, 02 Mar 2022 22:59:51 +0400</pubDate>
       
-      <guid>https://www.waelfadlallah.com/blogs/hello-world/</guid>
+      <guid>https://www.waelfadlallah.com/posts/my-first-post/</guid>
       <description>
         
           
