@@ -9,6 +9,9 @@ handlers:
   - url: /posts/(.+)/
     static_files: posts/\1/index.html
     upload: posts/(.+)/index.html
+  - url: /(.+)
+    static_files: \1
+    upload: (.+)
   - url: /
     static_files: index.html
     upload: index.html

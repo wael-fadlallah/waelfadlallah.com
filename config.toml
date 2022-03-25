@@ -2,6 +2,7 @@ baseURL = 'https://www.waelfadlallah.com/'
 languageCode = 'en-us'
 title = "Wael blog"
 theme='hello'
+Copyright = "Wael"
 
 [params]
 # dir name of your blog content (default is `content/posts`).
@@ -30,7 +31,7 @@ showReadingTime = false
 title = "Wael"
 subtitle = "My corner of the internet"
 keywords = ""
-copyright = ""
+copyright = "Copyright © {year} Wael Fadlallah. All rights reserved " 
 menuMore = "Show more"
 writtenBy = "Written by"
 readMore = "Read more"
@@ -48,15 +49,27 @@ dateFormatList = "2006-01-02"
     # logoHomeLink = "/"
 # or
 #
-    path = "assets/img/logo.svg"
+    path = "/logo.svg"
     alt = "Wael blog"
 
 [languages.en.menu]
+    
     # [[languages.en.menu.main]]
     # identifier = "about"
     # name = "About"
     # url = "https://about.waelfudlallah.com"
+
     # [[languages.en.menu.main]]
-    # identifier = "showcase"
-    # name = "Showcase"
-    # url = "/showcase"
+    # identifier = "Resume"
+    # name = "Resume"
+    # url = "/resume"
+
+    [[languages.en.menu.main]]
+    identifier = "linkedin"
+    name = "Linkedin Profile"
+    url = "https://www.linkedin.com/in/wael-fadl-allah/"
+    
+    [[languages.en.menu.main]]
+    identifier = "github"
+    name = "Github account"
+    url = "https://github.com/wael-fadlallah"
