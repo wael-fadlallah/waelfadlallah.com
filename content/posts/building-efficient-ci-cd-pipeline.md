@@ -8,6 +8,7 @@ draft: false
 - [About the example app](#about-the-example-app)
 - [Getting our hands dirty with the tests](#getting-our-hands-dirty-with-the-tests)
 - [Manual Deployment](#manual-deployment)
+- [Setting up GitHub actions](#setting-up-github-actions)
 
 ## Overview
 
@@ -142,5 +143,72 @@ gcloud app deploy
 
 After the deploing finish you will see the deployed app url, copy it and past it in brower or hold `control` and click on it
 
-- Setting up GitHub actions
+## Setting up GitHub actions
+
+{{< code language="yaml" title="main.yaml" id="2" expand="Show" collapse="Hide" isCollapsed="false" >}}
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.1.0
+        with:
+          version: 6.0.2
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies]
+      - name: Run vitest
+        run: pnpm run test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: pnpm/action-setup@v2.1.0
+        with:
+          version: 6.0.2
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies]
+      - name: Build the project
+        run: pnpm run build
+
+      - name: copy app.yaml file to the build directory
+        run: cp app.yaml dist
+
+      - name: cd to the build directory and deploy the project
+        run: cd dist
+
+#       - id: "auth"
+      - uses: "google-github-actions/auth@v0"
+        with:
+          credentials_json: "${{ secrets.GCP_SA_KEY }}"
+
+#       - id: "deploy"
+      - uses: google-github-actions/deploy-appengine@main
+        with:
+          working_directory: dist
+          version: 20220313t185328
+{{< /code>}}
+
 - Conclusion
