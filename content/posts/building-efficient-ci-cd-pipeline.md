@@ -1,6 +1,6 @@
 ---
 title: "Building Efficient CI/CD Pipeline with GitHub actions and app engine"
-date: 2022-03-14T22:05:57+04:00
+date: 2022-03-30T22:05:57+04:00
 draft: false
 ---
 
@@ -199,16 +199,24 @@ jobs:
       - name: cd to the build directory and deploy the project
         run: cd dist
 
-#       - id: "auth"
-      - uses: "google-github-actions/auth@v0"
+      - uses: google-github-actions/auth@v0
         with:
           credentials_json: "${{ secrets.GCP_SA_KEY }}"
 
-#       - id: "deploy"
       - uses: google-github-actions/deploy-appengine@main
         with:
           working_directory: dist
           version: 20220313t185328
 {{< /code>}}
 
-- Conclusion
+Basically, we have two jobs the first one install pnpm and run `npx vitest`, the second one is where the magic is happening so let's explain it deeper.
+
+Before deploying we need to make sure the test is finished, that why we added `needs: test` to the job, then we install PNPM and build the project.
+
+If yoy notice that the `app.yaml` is at the root of the project as for now, that why after building the project we need to copy `app.yaml` to `dist` which is the build directory.
+
+Finally inside the `dist` directory we simply use `google-github-actions/auth@v0` action to authenticate and `google-github-actions/deploy-appengine@main` to deploy the project
+
+## Conclusion
+
+CI/CD supercharge software development flow and very important to prevent problems by abstracting the the deployment and stop depoying bad code by adding tests to the pipeline, Github actions provide a clean and easy way to build them directly into the project.
