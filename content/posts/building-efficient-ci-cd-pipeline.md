@@ -1,6 +1,6 @@
 ---
 title: "Building Efficient CI/CD Pipeline with GitHub actions and app engine"
-date: 2022-03-14T22:05:57+04:00
+date: 2022-03-30T22:05:57+04:00
 draft: false
 ---
 
@@ -8,6 +8,7 @@ draft: false
 - [About the example app](#about-the-example-app)
 - [Getting our hands dirty with the tests](#getting-our-hands-dirty-with-the-tests)
 - [Manual Deployment](#manual-deployment)
+- [Setting up GitHub actions](#setting-up-github-actions)
 
 ## Overview
 
@@ -142,5 +143,80 @@ gcloud app deploy
 
 After the deploing finish you will see the deployed app url, copy it and past it in brower or hold `control` and click on it
 
-- Setting up GitHub actions
-- Conclusion
+## Setting up GitHub actions
+
+{{< code language="yaml" title="main.yaml" id="2" expand="Show" collapse="Hide" isCollapsed="false" >}}
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: pnpm/action-setup@v2.1.0
+        with:
+          version: 6.0.2
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies]
+      - name: Run vitest
+        run: pnpm run test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: pnpm/action-setup@v2.1.0
+        with:
+          version: 6.0.2
+          run_install: |
+            - recursive: true
+              args: [--frozen-lockfile, --strict-peer-dependencies]
+      - name: Build the project
+        run: pnpm run build
+
+      - name: copy app.yaml file to the build directory
+        run: cp app.yaml dist
+
+      - name: cd to the build directory and deploy the project
+        run: cd dist
+
+      - uses: google-github-actions/auth@v0
+        with:
+          credentials_json: "${{ secrets.GCP_SA_KEY }}"
+
+      - uses: google-github-actions/deploy-appengine@main
+        with:
+          working_directory: dist
+          version: 20220313t185328
+{{< /code>}}
+
+Basically, we have two jobs the first one install pnpm and run `npx vitest`, the second one is where the magic is happening so let's explain it deeper.
+
+Before deploying we need to make sure the test is finished, that why we added `needs: test` to the job, then we install PNPM and build the project.
+
+If yoy notice that the `app.yaml` is at the root of the project as for now, that why after building the project we need to copy `app.yaml` to `dist` which is the build directory.
+
+Finally inside the `dist` directory we simply use `google-github-actions/auth@v0` action to authenticate and `google-github-actions/deploy-appengine@main` to deploy the project
+
+## Conclusion
+
+CI/CD supercharge software development flow and very important to prevent problems by abstracting the the deployment and stop depoying bad code by adding tests to the pipeline, Github actions provide a clean and easy way to build them directly into the project.
