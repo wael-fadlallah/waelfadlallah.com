@@ -14,7 +14,7 @@ draft: false
 
 ## Overview
 
-Being a middle eastern software engineer I'm most of my projects is multi language and making multi language web application can somtimes become challenging, especially when working with RTL languages like arabic and its not just about the translations and adjusting the direction we need to architecture the whole project in meanful way to make things easier
+Being a software engineer in the middle east most of my projects is multi language and making multi language web application can somtimes become challenging, especially when working with a right to left languages like arabic and its not just about the translations and adjusting the direction we need to architecture the whole project in meanful way to make things easier
 
 ## About the example app
 
@@ -31,6 +31,29 @@ yarn add i18next react-i18next
 ## Adding the translations
 
 Beside our `main.tsx` lets create `i18n.ts` which will hold our localizing config and add the following
+
+{{< code language="yaml" title="app.yaml" id="2" expand="Show" collapse="Hide" isCollapsed="false" >}}
+import i18n from "i18next";
+import en from "./locale/en";
+import ar from "./locale/ar";
+import { initReactI18next } from "react-i18next";
+
+const resources = {
+...en,
+...ar,
+};
+
+i18n.use(initReactI18next).init({
+resources,
+lng: "en", // default language
+interpolation: {
+escapeValue: false, // react already safes from xss
+},
+});
+
+export default i18n;
+
+{{< /code >}}
 
 ## Configure Local Storage
 
