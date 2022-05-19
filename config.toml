@@ -16,7 +16,7 @@ defaultTheme = "dark"
 showMenuItems = 2
 
 # Show reading time in minutes for posts
-showReadingTime = false
+showReadingTime = true
 
 # Show table of contents at the top of your posts (defaults to false)
 # Alternatively, add this param to post front matter for specific posts
