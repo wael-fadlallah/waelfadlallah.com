@@ -1,20 +1,14 @@
 ---
-title: "Building Efficient CI/CD Pipeline with GitHub actions and app engine"
+title: "Building Simple CI/CD Pipeline with GitHub Actions and App Engine"
 date: 2022-03-30T22:05:57+04:00
 draft: false
 ---
 
-- [Overview](#overview)
-- [About the example app](#about-the-example-app)
-- [Getting our hands dirty with the tests](#getting-our-hands-dirty-with-the-tests)
-- [Manual Deployment](#manual-deployment)
-- [Setting up GitHub actions](#setting-up-github-actions)
-
 ## Overview
 
-One of the most important skills to master for becoming an experienced software developer is the automation of the repeatable tasks and I believe the most important one of them is the development process is self which includes merging, testing, and deploying the code and in the article, I want to show to efficiently build a CI/CD pipeline that does all of that
+One of the most important skills for becoming an experienced software developer is the automation of the repeatable tasks and I believe the most important one of them is the deployment process itself which includes merging, testing and deploying the code in the article, I want to show to efficiently build a CI/CD pipeline that does all of that
 
-I found that GitHub actions to be extremely powerful and easy to use and the fact that GitHub is widely used by developers made it ideal to chose it as part of this pipeline
+I found GitHub actions to be extremely powerful and easy to use and the fact that GitHub is widely used by developers made it ideal to choose it as part of this pipeline
 
 - **Prerequisites**:
   - Gcloud CLI <https://cloud.google.com/sdk/docs/install>
@@ -23,11 +17,13 @@ I found that GitHub actions to be extremely powerful and easy to use and the fac
     - **App Engine**
     - **App Engine Admin API**
     - **Cloud Build API**
-  - PNPM (optional, you can use any npm or yarn)
+  - PNPM (optional, you can use npm or yarn)
 
 ## About the example app
 
 For demonstration purposes I have built a simple Todo list app with React and Typescript, I have used Vite as a development server and build tool because its simple, fast, and most importantly easily used with Vitest for testing
+
+App structure
 
 ```text
  📂 Todo-App
@@ -53,7 +49,7 @@ For demonstration purposes I have built a simple Todo list app with React and Ty
 
 ## Getting our hands dirty with the tests
 
-I have already install and configure Vitest and enzyme to save us time and to keep this post focuses about the CI/CD pipeline, the test is straight forward under the code I will explian what I did.
+I have already installed and configured Vitest and enzyme to save us time and to keep this post focused on the CI/CD pipeline, the test is straightforward.
 
 {{< code language="javascript" title="App.spec.tsx" id="1" expand="Show" collapse="Hide" isCollapsed="false" >}}
 import { it, describe, expect, beforeEach, vi } from "vitest";
@@ -120,8 +116,9 @@ handlers:
     upload: index.html
 
 {{< /code>}}
+We are setting the environment to `standard` and the runtime to `nodejs16` you can learn more about app engine environments by click [here](https://cloud.google.com/appengine/docs/the-appengine-environments),And the `handlers` are URL patterns and descriptions of how they should be handled, for exapmle am making `assets` a static dirctory and mapping very request for a JS or CSS file to it, and finally I'm mapping any other request to `index.html` file
 
-now if you didn't install gcloud yet now is a good click [here](https://cloud.google.com/sdk/docs/install)
+Now if you didn't install gcloud yet now is a good time, click [here](https://cloud.google.com/sdk/docs/install) for instructions.
 
 First login to your account
 
@@ -129,19 +126,19 @@ First login to your account
 gcloud auth login
 ```
 
-After you you select the account and allow google sdk to use your account you will notice in the terminal your project name, if its not the project that you want to use you can change it with this command 
+Select the account and allow Google SDK to use your account you will notice the project name in the terminal, if it's not the project that you want to use you can change it with this command.
 
 ```shell
 gcloud config set project PROJECT_ID
 ```
 
-Now that we are authenticated we can deploy the app with
+Now that we are authenticated we can deploy the app with:
 
 ```shell
 gcloud app deploy
 ```
 
-After the deploing finish you will see the deployed app url, copy it and past it in brower or hold `control` and click on it
+After the deploying finish, you will see the deployed app URL, copy it and past it in the browser or hold `control` and click on it
 
 ## Setting up GitHub actions
 
@@ -209,14 +206,14 @@ jobs:
           version: 20220313t185328
 {{< /code>}}
 
-Basically, we have two jobs the first one install pnpm and run `npx vitest`, the second one is where the magic is happening so let's explain it deeper.
+We have two jobs the first one installs PNPM and run `npx vitest`, and the second one is where the magic is happening so let's explain it deeper.
 
-Before deploying we need to make sure the test is finished, that why we added `needs: test` to the job, then we install PNPM and build the project.
+Before deploying we need to make sure the test is finished, that is why we added `needs: test` to the job, then we install PNPM and build the project.
 
-If yoy notice that the `app.yaml` is at the root of the project as for now, that why after building the project we need to copy `app.yaml` to `dist` which is the build directory.
+If you notice that the `app.yaml` is at the root of the project that is why after building the project we need to copy `app.yaml` to `dist` which is the build directory.
 
-Finally inside the `dist` directory we simply use `google-github-actions/auth@v0` action to authenticate and `google-github-actions/deploy-appengine@main` to deploy the project
+Finally, inside the `dist` directory, we simply use `google-github-actions/auth@v0` action to authenticate and `google-github-actions/deploy-appengine@main` to deploy the project
 
 ## Conclusion
 
-CI/CD supercharge software development flow and very important to prevent problems by abstracting the the deployment and stop depoying bad code by adding tests to the pipeline, Github actions provide a clean and easy way to build them directly into the project.
+CI/CD supercharge software development flow and is very important to prevent problems by abstracting the deployment and stop deploying bad code by adding tests to the pipeline, Github actions provide a clean and easy way to build them directly into the project.
