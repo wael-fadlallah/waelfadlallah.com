@@ -1,17 +1,22 @@
 env: standard
 runtime: nodejs16
 service: default
+
 handlers:
   - url: /assets
     static_dir: assets
     http_headers:
       Access-Control-Allow-Origin: "*"
+    secure: always
   - url: /posts/(.+)/
     static_files: posts/\1/index.html
     upload: posts/(.+)/index.html
+    secure: always
   - url: /(.+)
     static_files: \1
     upload: (.+)
+    secure: always
   - url: /
     static_files: index.html
     upload: index.html
+    secure: always
