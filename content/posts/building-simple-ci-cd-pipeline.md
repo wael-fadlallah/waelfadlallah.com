@@ -2,6 +2,7 @@
 title: "Building Simple CI/CD Pipeline with GitHub Actions and App Engine"
 date: 2022-03-30T22:05:57+04:00
 draft: false
+# cover: "cicd.png"
 ---
 
 ## Overview

@@ -5,6 +5,7 @@ theme='hello'
 Copyright = "Wael"
 
 [params]
+  images = ['site-feature-image.png']
 # dir name of your blog content (default is `content/posts`).
 # the list of set content will show up on your index page (baseurl).
 contentTypeName = "posts"
@@ -25,7 +26,8 @@ toc = true
 # Show full page content in RSS feed items
 #(default is Description or Summary metadata in the front matter)
 # rssFullText = true
-
+useRelativeCover = true  # if relative path
+cover = "img.jpg"
 [languages]
 [languages.en]
 title = "Wael"
