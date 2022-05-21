@@ -5,7 +5,7 @@ theme='hello'
 Copyright = "Wael"
 
 [params]
-  images = ['site-feature-image.png']
+ images = ['site-feature-image.png','site-cover-image.png','site-thumbnail-image.png']
 # dir name of your blog content (default is `content/posts`).
 # the list of set content will show up on your index page (baseurl).
 contentTypeName = "posts"
@@ -30,9 +30,10 @@ useRelativeCover = true  # if relative path
 cover = "img.jpg"
 [languages]
 [languages.en]
-title = "Wael"
+title = "Wael Fadlallh's Blog"
+description = "Hi 👋 I'm Wael, A passionate software engineer"
 subtitle = "My corner of the internet"
-keywords = ""
+keywords = "Software developer, Javascript, React, Native, NodeJs, Dubai, Software engineer"
 copyright = "Copyright © {year} Wael Fadlallah. All rights reserved " 
 menuMore = "Show more"
 writtenBy = "Written by"
