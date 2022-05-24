@@ -28,6 +28,7 @@ toc = true
 # rssFullText = true
 useRelativeCover = true  # if relative path
 cover = "img.jpg"
+googleAnalytics = "G-7JT53VNQ4R"
 [languages]
 [languages.en]
 title = "Wael Fadlallh's Blog"
