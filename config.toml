@@ -32,7 +32,7 @@ googleAnalytics = "G-7JT53VNQ4R"
 [languages]
 [languages.en]
 title = "Wael Fadlallh's Blog"
-description = "Hi 👋 I'm Wael, A passionate software engineer"
+description = "Hi 👋 I'm Wael, A passionate software engineer "
 subtitle = "My corner of the internet"
 keywords = "Software developer, Javascript, React, Native, NodeJs, Dubai, Software engineer"
 copyright = "Copyright © {year} Wael Fadlallah. All rights reserved " 
